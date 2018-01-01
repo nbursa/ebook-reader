@@ -1,0 +1,1382 @@
+
+$shadow: 5px 0 15px rgba(0, 0, 0, .1), -5px 0 15px rgba(0, 0, 0, .1)
+
+$grey: #504f4d
+$lgrey: #c4c4c4
+$blue: #2c3e50
+// $blue: #282c34
+$green: #42b983
+$white: #f3f3f3
+$orange: #fb8c00
+$sepia: #dcc1a7
+$wh_flat: #fff
+$newBlue: #0074D9
+$lBlue: #4BACB8
+// $grey: #282c34
+
+$opaque-lBlue: transparentize($blue, .15)
+$oBlack: transparentize(black, .8)
+// $opaque-lBlue: #fff
+
+$void: #0E0816
+
+$bg: #f3f3f3
+$menu-bg: #f3f3f3
+$menu-color: #282c34
+
+$book-shadow: 0 0 5px 5px $opaque-lBlue
+$toolbar-shadow: 0 2px 4px -1px $oBlack, 0 4px 5px $oBlack, 0 1px 10px $oBlack
+// $toolbar-shadow: 0 2px 4px -1px $opaque-lBlue, 0 4px 5px $opaque-lBlue, 0 1px 10px $opaque-lBlue
+// $drawer-shadow: 0 8px 10px -5px $opaque-lBlue, 0 16px 24px 2px $opaque-lBlue, 0 6px 30px 5px $opaque-lBlue
+
+$slim-shadow: 0 2px 4px -1px rgba(44, 62, 80, .05), 0 4px 5px rgba(44, 62, 80, .05), 0 1px 10px rgba(44, 62, 80, .05)
+$drawer-shadow: 0 2px 4px -1px rgba(44, 62, 80, .01), 0 4px 5px rgba(44, 62, 80, .01), 0 1px 10px rgba(44, 62, 80, .01)
+$book-shadow: 0 2px 4px -1px rgba(44, 62, 80, .01), 0 4px 5px rgba(44, 62, 80, .01), 0 1px 10px rgba(44, 62, 80, .01)
+// $toolbar-shadow: 0 8px 10px -5px $opaque-lBlue, 0 16px 24px 2px $opaque-lBlue, 0 6px 30px 5px $opaque-lBlue
+
+*
+  margin: 0
+  padding: 0
+
+html
+  margin: 0
+  padding: 0
+  overflow: hidden
+  height: 100%
+
+body
+  font-family: 'Raleway', sans-serif
+  text-align: center
+  color: $bg
+  overflow: hidden
+  background-color: $grey
+  fill: currentColor!important
+  color: orange!important
+  height: 100%
+
+main
+  padding: 0
+
+h1,
+h2
+  font-weight: normal
+
+ul
+  list-style-type: none
+  padding: 0
+  li
+    display: inline-block
+    margin: 0 10px
+
+a
+  color: $newBlue
+  text-decoration: none
+  &:hover
+    color: $lBlue
+
+svg
+  border: 5px solid currentColor!important
+  fill: currentColor!important
+
+.info
+  position: absolute
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  background-color: $blue
+  opacity: .5
+  z-index: 10
+
+.dialog__content
+  z-index: 22 !important
+  opacity: .95 !important
+  .dialog.dialog--active.dialog--fullscreen
+    .infoDialog
+      height: 100vh !important
+      font-size: 17px
+      i
+        color: $white
+        font-size: 25px
+      .menuIns
+        position: absolute
+        top: 0
+        left: 0
+        width: 80px
+        height: 50px
+        // border: 1px solid $white
+        // background: transparentize($white, .85)
+        i
+          padding: 12px 20px
+        @media screen and (max-width: 768px)
+          width: 20vw
+      .menuInsTip
+        position: absolute
+        top: 55px
+        left: 25px
+        width: 180px
+        padding: 0 10px 10px
+        border: 1px solid $white
+        border-radius: 0 15px 15px 15px
+        @media screen and (max-width: 768px)
+          font-size: 14px
+          width: 20vw
+          left: 0
+          padding: 5px
+      .socMenu
+        position: absolute
+        top: 0
+        left: 100px
+        height: 50px
+        // border: 2px solid $white
+        padding: 5px 0
+        // background: transparentize($white, .85)
+        i
+          padding: 10px 18px
+          font-size: 17px
+        @media screen and (max-width: 768px)
+          display: none
+      .socMenuMob
+        position: absolute
+        top: 0
+        left: 20vw
+        // border: 2px solid $white
+        padding: 5px 0
+        // background: transparentize($white, .85)
+        width: 20vw
+        i
+          padding: 9px 18px
+          font-size: 20px
+          color: $white
+        @media screen and (min-width: 768px)
+          display: none
+      .socMenuTip
+        position: absolute
+        top: 55px
+        left: 300px
+        padding: 0 10px 10px
+        width: 200px
+        border: 1px solid $white
+        border-radius: 0 15px 15px 15px
+        @media screen and (max-width:768px)
+          font-size: 14px
+          left: 20vw
+          width: 20vw
+          padding: 5px
+      .resize-settings
+        position: absolute
+        right: 0
+        top: 0
+        width: 70px
+        padding: 12px 0
+        // border: 2px solid $white
+        // background: transparentize($white, .85)
+        i
+          color: $white
+          font-size: 26px !important
+        @media screen and (max-width: 768px)
+          width: 20vw
+          left: 80vw
+      .resize-settings-tip
+        position: absolute
+        right: 25px
+        top: 55px
+        border: 1px solid $white
+        border-radius: 15px 0 15px 15px
+        width: 220px
+        padding: 0 10px 8px
+        @media screen and (max-width:768px)
+          font-size: 14px
+          left: 80vw
+          width: 20vw
+          top: 53px
+          padding: 5px
+      .info-button
+        position: absolute
+        top: 0
+        right: 71px
+        // border: 2px solid $white
+        width: 50px
+        height: 50px
+        padding-top: 10px
+        // background: transparentize($white, .85)
+        @media screen and (max-width: 768px)
+          width: 20vw
+          left: 60vw
+      .info-button-tip
+        position: absolute
+        top: 3px
+        right: 125px
+        width: 250px
+        border: 1px solid $white
+        padding: 0 10px 10px
+        border-radius: 15px 0 15px 15px
+        @media screen and (max-width:768px)
+          font-size: 14px
+          left: 60vw
+          width: 20vw
+          top: 53px
+          padding: 5px
+      .left-button
+        position: absolute
+        top: 45vh
+        left: 100px
+        padding: 10px 20px
+        // border: 2px solid $white
+        // background: transparentize($white, .85)
+        @media screen and (max-width:768px)
+          left: 0
+          top: 55vh
+      .left-button-tip
+        position: absolute
+        top: calc(45vh + 50px)
+        left: 170px
+        border: 1px solid $white
+        padding: 0 10px 10px
+        border-radius: 0 15px 15px 15px
+        width: 200px
+        @media screen and (max-width:768px)
+          width: 40vw
+          left: 3px
+          top: 65vh !important
+          // bottom: 0 !important
+          font-size: 14px
+          padding: 5px
+      .right-button
+        position: absolute
+        top: 45vh
+        right: 100px
+        padding: 10px 20px
+        // border: 2px solid $white
+        // background: transparentize($white, .85)
+        @media screen and (max-width:768px)
+          right: 0
+          top: 55vh
+      .right-button-tip
+        position: absolute
+        top: calc(45vh + 50px)
+        right: 170px
+        border: 1px solid $white
+        padding: 0 10px 10px
+        border-radius: 15px 0 15px 15px
+        width: 200px
+        @media screen and (max-width:768px)
+          width: 40vw
+          right: 3px          
+          top: 65vh !important
+          // bottom: 0
+          font-size: 14px
+          padding: 5px
+      .buy-buttons
+        // border: 2px solid $white
+        position: absolute
+        top: 37vh
+        left: 0
+        width: 80px
+        padding: 10px
+        // background: transparentize($white, .85)
+        @media screen and (max-width:768px)
+          display: none
+        img
+          width: 50px
+      .buy-buttons-mob
+        // border: 2px solid $white
+        position: absolute
+        top: 0
+        left: 40vw
+        width: 20vw
+        padding: 10px
+        // background: transparentize($white, 1)
+        i
+          color: $white
+        @media screen and (min-width:768px)
+          display: none
+      .buy-buttons-tip
+        position: absolute
+        top: calc(37vh + 135px)
+        left: 5px
+        border: 1px solid $white
+        border-radius: 0 15px 15px 15px
+        width: 120px
+        padding: 0 10px 10px
+        @media screen and (max-width:768px)
+          font-size: 14px
+          top: 55px
+          left: 40vw
+          width: 20vw
+          padding: 5px
+      .headline
+        margin: 0 auto
+        padding-top: 40vh
+        width: 100vw
+        @media screen and (max-width:768px)
+          padding-top: 50vh
+      .closeDialog
+        color: $white
+        background: $lBlue !important
+        margin: 0 auto
+        padding: 10px
+        box-shadow: none
+        margin-top: 5px
+        border: 0
+
+.overlay.overlay--active
+  background: $blue
+  z-index: -1 !important
+
+.infoDialog
+  background-color: $blue !important
+  color: $white !important
+  
+[data-tooltip][data-tooltip-location='bottom']:before
+    top: 100%
+    left: 50%
+    -webkit-transform: translate3d(-50%, -14px, 0) scale(0)
+    transform: translate3d(-50%, -14px, 0) scale(0)
+    -webkit-transform-origin: center top
+    transform-origin: left top
+
+[data-tooltip]
+  &:before
+    color: $menu-color
+    background: transparentize($white, .5)
+    background: $white
+    // width: 5vw
+    box-shadow: none
+    z-index: 99
+
+[data-tooltip]:hover
+  &:before
+    opacity: 1 !important
+
+.main-menu-button[data-tooltip][data-tooltip-location='bottom']:before
+  left: 100%
+  top: 90%
+
+.desktop-social-btn .btn[data-tooltip][data-tooltip-location='bottom']:before
+  left: 200%
+  // top: 90%
+.settings-button[data-tooltip][data-tooltip-location='bottom']:before
+  left: -0%
+
+.lib-item-size
+  height: 30px
+  .input-group
+    display: inline-block
+    float: right
+    width: 100px
+  i
+    display: inline-block
+    cursor: pointer
+    margin: -14px 5px 0 0
+    padding: 15px
+    border: 1px solid transparentize($lBlue, 1)
+    &:hover,
+    &:active,
+    &:focus
+      color: $lBlue
+
+.overlay,
+.overlay--absolute,
+.overlay--active
+  opacity: .5
+  z-index: 3
+  background-color: $blue
+
+nav
+  background-color: $menu-bg !important
+
+.btn--active .btn__content:before, 
+.btn:hover .btn__content:before, 
+.btn:focus .btn__content:before
+  background-color: $bg
+
+.main-menu.toolbar
+  z-index: 20 !important
+  box-shadow: none
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1), 0 1px 6px rgba(0,0,0,0.2) !important
+  // box-shadow: $slim-shadow
+  // box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset
+
+// .main-menu.toolbar:before,
+// .main-menu.toolbar:after
+//   content: ""
+//   position: absolute
+//   z-index: -1 !important
+//   box-shadow: 0 0 20px rgba(0,0,0,0.8)
+//   top: 50%
+//   bottom: 0
+//   left: 10px
+//   right: 10px
+//   -moz-border-radius: 100px / 10px
+//   border-radius: 100px / 10px
+
+// .main-menu.toolbar:after
+//   right: 10px
+//   left: auto
+//   transform: skew(8deg) rotate(3deg)
+
+.main-menu
+  background-color: $menu-bg !important
+  height: 50px
+  z-index: 5 !important
+  padding: 0 10px
+  // box-shadow: $slim-shadow
+  @media screen and (max-width: 460px)
+    padding: 0
+  .toolbar__content
+    height: auto
+  button
+    width: 70px
+    height: 50px
+    outline: 0
+    margin: 5px
+    padding: 0 20px
+    i
+      color: $void !important
+    // z-index: 4
+    &:hover,
+    &:active,
+    &:focus
+      opacity: 1
+      i
+        color: $lBlue !important
+    @media screen and (max-width:768px)
+      width: 20vw !important
+
+.main-menu ul > span
+  float: left
+  padding: 1rem
+
+.navigation-drawer
+  // background-color: $blue
+
+.navigation-drawer--right, .menu
+  z-index: 3 !important
+
+.menu.navigation-drawer
+  transition: all .2s ease-in-out
+  background-color: $menu-bg !important
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.2) !important
+  // box-shadow: $slim-shadow !important
+  padding-right: 10px
+  // padding-left: 5px
+  ul.list
+    background-color: $bg !important
+    margin-top: 60px
+    margin-right: -25px
+    margin-left: 5px
+    padding-bottom: 80px
+    li a.list__tile,
+    .list__tile--highlighted
+      color: $grey !important
+      height: 75px
+      border: 1px solid transparentize($lBlue, 1)
+      &:hover,
+      &:active,
+      &:focus
+        color: $lBlue !important
+        background-color: transparentize($blue, .95)
+        border: 1px solid transparentize($lBlue, .75)
+      .list__tile__action i
+        color: $lBlue !important
+    li a.list__tile--active
+      color: $lBlue !important
+
+.menu .menu__activator
+  font-size: 15px
+  background: transparentize($blue, 1)
+  border: 1px solid transparentize($lBlue, 1)
+  height: 50px
+  &:hover,
+  &:active,
+  &:focus
+    color: $lBlue !important
+    background: transparentize($blue, .95) !important
+    border: 1px solid transparentize($lBlue, .75)
+  .toolbar__title
+    margin-top: 7px
+
+.menu .menu__activator--active
+  color: $lBlue !important
+  background: transparentize($blue, .95) !important
+  border: 1px solid transparentize($lBlue, .75)
+
+.toolbar__content > *:not(.btn):not(.toolbar__title):not(.menu):last-child,
+.toolbar__extension > *:not(.btn):not(.toolbar__title):not(.menu):last-child
+  margin-right: 0
+
+.toolbar__content > *:not(.btn):not(.toolbar__title):not(.menu):first-child,
+.toolbar__extension > *:not(.btn):not(.toolbar__title):not(.menu):first-child
+  margin-left: 0
+  width: 85px
+
+// .toolbar__content
+//   z-index: 5 !important
+//   background-color: grey
+
+.btn
+  min-width: 0
+
+.buy-menu
+  top: 50px
+  // z-index: 2 !important
+// .social-menu
+//   top: 1px
+
+// .main-menu
+//   z-index: 5 !important
+
+.buy-menu, .social-menu
+  // position: relative
+  width: 100vw
+  padding: 5px 30px
+  border: 1px solid transparentize($lBlue, 1)
+  box-shadow: 0 0 0 6px 30px 5px rgba(0,0,0,0.12) !important
+  .list
+    z-index: 0 !important
+  .list__tile:hover,
+  .list__tile:active,
+  .list__tile:focus
+    color: $lBlue !important
+    background: transparentize($blue, .95) !important
+    border: 1px solid transparentize($lBlue, .75)
+    img
+      svg
+        fill: $lBlue !important
+  .list__tile__action
+    font-size: 20px
+    img
+      height: 22px
+      svg
+        fill: $lBlue !important
+
+.buy-menu.navigation-drawer--close:not(.navigation--permanent).navigation-drawer:not(.navigation-drawer--right),
+.social-menu.navigation-drawer--close:not(.navigation--permanent).navigation-drawer:not(.navigation-drawer--right)
+  transform: translate3d(0,calc(-100% - 100px),0)
+
+// .main-menu-button
+//   margin-left: 10px
+
+// nav.main-menu button, .toolbar button, .toolbar--fixed button, .toolbar__content button
+//   background-color: #282c34 !important
+
+.main-menu-button,
+.info-btn,
+.settings-button
+  padding: 0
+  margin: 0 !important
+  // height: 49px !important
+  box-shadow: none
+  border: 0 !important
+  &:focus,
+  &:active,
+  &:hover
+    background-color: $bg
+    // color: $menuGrey !important
+    i.icon
+      color: $lBlue !important
+      // color: $menu-color !important
+      // text-shadow: 0 0 5px $lBlue
+    // box-shadow: none
+    
+  @media screen and (max-width: 768px)
+    &:focus,
+    &:active,
+    &:hover
+      background-color: $bg
+      // color: $menuGrey !important
+      i.icon
+        // color: $white !important
+        color: $lBlue !important
+        text-shadow: none
+      // box-shadow: none
+
+.mobile-social-btn
+  display: none
+  padding: 0
+  margin: 0 !important
+  height: 49px !important
+  box-shadow: none
+  border: 0 !important
+  // background: $blue !important
+  i
+    opacity: .7 !important
+    // color: $blue !important
+  &:focus,
+  &:active,
+  &:hover
+    // background-color: $blue !important
+    box-shadow: none
+
+.mobile-buy-btn
+  display: none
+  padding: 0
+  margin: 0 !important
+  height: 49px !important
+  box-shadow: none
+  border: 0 !important
+  font-weight: bolder !important
+  i
+    opacity: .7 !important
+    // color: $blue !important
+  &:focus,
+  &:active,
+  &:hover
+    background-color: transparentize(black, 1)
+    box-shadow: none
+
+.main-menu-button
+  @media screen and (max-width:768px)
+    width: 20vw !important
+    padding: 0 !important
+
+.settings-button
+  @media screen and (max-width:768px)
+    width: 20vw !important
+    right: 0 !important
+
+.desktop-social-btn
+  box-shadow: none
+  a.btn
+    margin: 0
+    // color: none
+    i.icon
+      color: $menu-color !important
+      font-size: 20px
+    &:hover,
+    &:active,
+    &:focus
+      // color: $lBlue !important
+      // .btn__content
+        // background-color: rgba(0,0,0,0) !important
+      i.icon
+        color: $lBlue !important
+        // text-shadow: 0 0 20px $lBlue
+
+.navigation-drawer__border
+  display: none
+
+.mini-bar.navigation-drawer--mini-variant
+  height: auto !important
+  margin: 0
+  margin-top: 60px
+  padding: 0
+  top: calc(25% - 60px)
+  transform: translate3d(0, -50%, 0)
+  z-index: 2
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1), 0 1px 6px rgba(0,0,0,0.2) !important
+  // box-shadow: $slim-shadow
+  ul.list
+    background: $bg !important
+    height: auto
+    overflow: hidden
+    a
+      width: 100%
+      &:hover,
+      &:active,
+      &:focus
+        background: transparentize($lBlue, .9) !important
+      img
+        width: 35px
+        display: block
+        margin: 10px auto
+  @media screen and (min-width: 768px)
+    display: block
+
+
+
+.settings-drawer
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1), 0 1px 6px rgba(0,0,0,0.2) !important
+  // box-shadow: $slim-shadow !important
+  // box-shadow: $toolbar-shadow
+  ul.list
+    background-color: $menu-bg !important
+    // color: $white !important
+    button#black
+      border: 1px solid $white !important
+
+.container
+  padding: 0
+
+.font1, .font2
+  font-size: 1em
+
+.menu__content
+  width: 200px
+  left: auto !important
+  right: 20px
+  top: 150px !important
+  z-index: 6 !important
+
+.input-group--overflow .input-group__input:before,
+.input-group--editable .input-group__input:before,
+.input-group--segmented .input-group__input:before,
+.input-group__details:before
+  height: 0
+
+.application--light .input-group.input-group--dirty .input-group__selections__comma
+  color: $lBlue
+  font-weight: bold
+  letter-spacing: 3px
+
+.bold-font
+  font-weight: bold
+  color: $lBlue
+  font-size: 17px
+
+.list li
+  width: 100%
+  margin: 0
+
+.input-group--select
+  padding: 0
+  height: 30px
+
+.radio
+  width: 50%
+  float: left
+  padding: 0
+  padding-top: 20px
+
+.input-group__details:after
+  background-color: $lBlue
+
+.slider
+  height: 0
+
+.slider__thumb
+  cursor: pointer
+
+.input-group--slider.input-group--dirty .slider__thumb
+  background-color: $lBlue
+  width: 25px
+  height: 25px
+
+.input-group--slider.input-group--dirty .slider__thumb--label
+  background-color: $lBlue
+
+.application--light .input-group--slider:not(.input-group--dirty).input-group--ticks .slider__thumb-container .slider__thumb
+  background-color: $lBlue
+
+.application--light .input-group--slider:not(.input-group--dirty):not(.input-group--ticks):focus .slider__thumb
+  background-color: $lBlue
+  border: 4px solid $lBlue!important
+
+.input-group--slider:not(.input-group--disabled).input-group--dirty .slider__track-fill
+  background-color: $lBlue
+
+.input-group--slider
+  height: 30px
+  padding-bottom: 0
+
+.application--light .input-group.input-group--selection-controls.radio, .application--light .input-group.input-group--selection-controls.checkbox
+  color: $lBlue
+
+.input-group--selection-controls
+  height: 60px
+
+.library
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  overflow: hidden
+  padding-right: 20px
+  margin-right: -20px
+
+.nav-btn
+  overflow: hidden
+  position: absolute
+  top: 0
+  padding: 20px
+  transition: .3s ease-in-out
+  height: 100vh
+  width: 50%
+  margin: 0
+  background-color: $white !important
+  &:hover
+    .icon
+      color: transparentize($lBlue, .5) !important
+      text-shadow: 2px 1px 10px transparentize($lBlue, .5)
+  &:hover,
+  &:active,
+  &:focus,
+    // background-color: transparentize(black, .8)
+  img
+    height: 50px
+  .icon
+    height: 100%
+    position: absolute
+    top: 0
+    font-size: 5rem
+    color: transparentize($lBlue, .7) !important
+
+.left
+  left: 0
+  .icon
+    left: 80px
+    @media screen and (min-width: 1024px)
+      left: 100px
+  img
+    transform: rotate(180deg)
+
+.right
+  right: 0
+  .icon
+    right: 80px
+
+.wrap
+  filter: brightness(100%)
+
+.progress-linear 
+  position: absolute
+  margin: 0
+  padding: 0
+  top: 50px
+  z-index: 10
+  opacity: .5
+  .progress-linear__bar
+    background: transparentize($lBlue, .6)
+    // opacity: .5
+    .progress-linear__bar__determinate
+      background-color: $lBlue
+
+.book-content
+  background-color: $white
+  // box-shadow: $drawer-shadow
+  // box-shadow: 0 0 15px 0px $lBlue
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.2)
+  // box-shadow: $book-shadow
+  max-width: 100%
+  min-width: 500px
+  width: 70%
+  padding: 40px 40px 0
+  overflow: hidden
+  z-index: 2 !important
+  margin-top: 50px
+  margin-left: 50%
+  transform: translate3d(-50%, 0, 0)
+  -webkit-transform: translate3d(-50%, 0, 0)
+  transition: all .35s cubic-bezier(0,.74,.36,1)
+  height: calc(100vh - 50px)
+  // height: 100vh !important
+  // position: absolute
+  .book-page
+    position: relative
+    // width: 100%
+    columns: 220px 2
+    column-gap: 40px
+    // height: 100vh
+    // height: 100%
+    height: 100vmax !important
+    // min-height: 100%
+    // min-height: calc(100vh - 50px) !important
+    max-height: calc(100vh - 50px) !important
+    // overflow-x: scroll
+    overflow-x: scroll
+    overflow-y: auto
+    overflow-y: -moz-hidden-unscrollable
+    padding-bottom: 40px
+    transition: all .35s cubic-bezier(0,.74,.36,1)
+    text-align: initial
+    color: $blue
+    column-fill: auto
+    // column-span: all
+    // column-fill: balance
+    // background: black
+    // display: flex
+    // display: table
+    // flex: 1
+    // display: flex
+    // justify-content: left
+    // flex-direction: column 
+    // display: flex
+    // flex-direction: column
+    font-family: 'Old Standard TT'
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6
+      font-family: 'Cabin'
+      // float: left
+      margin-top: 20px
+      width: 100%
+    h1.chapter
+      font-size: 70px
+      width: 100%
+    a
+      display: inline-block !important
+      width: 100%
+      float: left
+      // z-index: 4 !important
+    p, li
+      display: inline-block
+      overflow: hidden
+      float: left
+    .publisherInfo p
+      width: 100%
+      display: block
+      float: none
+    .coverImage, .seperator img, img
+      max-width: 100%
+      max-height: calc(100vh - 145px) !important
+      margin-bottom: 10px
+      margin-left: 50%
+      transform: translateX(-50%)
+      -webkit-transform: translateX(-50%)
+    .Inset
+      width: 100%
+    .subA
+      font-weight: bold
+      line-height: 3rem
+    ol>li:last-child
+      margin-bottom: 16px
+    td
+      border-right: 1px solid grey
+      border-bottom: 1px solid grey
+      padding: 10px
+      &:first-child
+        border-left: 1px solid grey
+    .headerRow
+      border: 1px solid grey
+    .subheader
+      font-size: .9em
+      height: auto
+      display: block
+      width: 100%
+      font-style: italic
+    #ncover,
+    #nendpaper,
+    #ntitle-page,
+    .toc-nav,
+    #nin1
+      display: block
+      width: 100%
+
+.lib-item-size .input-group
+  width: 150px
+  position: absolute
+  right: 0
+  top: 50px
+  background-color: $white
+  box-shadow: $shadow
+  padding: 20px 10px
+
+.settings
+  color: $blue
+  padding: 20px
+  margin-top: 30px
+  button.settings-link
+    outline: 0
+    border: 0
+    cursor: pointer
+    background: 0
+    margin-top: 10px
+    color: $blue
+    font-size: 26px
+    border: 1px solid darken($white, 10%)
+    padding: 0 1rem
+    &:hover
+      color: $orange
+      border: 1px solid $orange
+  .settings-container
+    color: $blue
+    position: absolute
+    top: 57px
+    left: calc(50% - 255px)
+    background: $white
+    border-radius: 1px
+    padding: 30px
+    width: 450px
+    box-shadow: $book-shadow
+    // box-shadow: 0 0 5px rgba(0,0,0,.5)
+    text-align: center
+    padding-bottom: 0
+    z-index: -10
+  .settings-list
+    .menu__content--dropdown
+      box-shadow: 0 !important
+    hr
+      border-color: transparentize($blue, .98)
+      width: 100%
+    li
+      margin-right: 10px
+      display: block
+      width: 100%
+      padding: 20px
+      &:first-child
+        margin-top: 10px
+      span
+        float: left
+        font-size: 1.1rem
+      #colors
+        margin: 0
+        padding: 0
+        width: 100%
+        button
+          font-size: 1.25rem
+          padding: 5px 10px
+          border: 1px solid $lBlue !important
+          border-radius: 1px
+          width: 85px
+          height: 50px
+          display: inline-block
+          margin: 0 0 3px
+        #white
+          color: $blue
+          border: 1px solid $white !important
+          background-color: $white !important
+          &:hover, &:active, &:focus
+            color: $blue
+            border: 1px solid $white !important
+            background-color: $white !important
+        #black
+          color: $white
+          border: 1px solid $white !important
+          background-color: $blue !important
+          &:hover, &:active, &:focus
+            color: $white
+            border: 1px solid $blue !important
+            background-color: $blue !important
+        #sepia
+          color: $blue
+          border: 1px solid $sepia !important
+          background-color: $sepia !important
+          &:hover, &:active, &:focus
+            color: $blue
+            border: 1px solid $sepia !important
+            background-color: $sepia !important
+      .input-group .input-group--dirty .input-group .input-group--slider .input-group--ticks .input-group--active
+        color: blue !important
+        background-color: blue
+    input[type="radio"]
+      width: 30px
+      float: none
+      width: 20px
+
+.input-group--overflow.input-group--focused .input-group__input, .input-group--editable.input-group--focused .input-group__input, .input-group--segmented.input-group--focused .input-group__input
+  box-shadow: 0
+
+.white
+  color: $blue !important
+  background-color: $white !important
+  .book-page, .bookTitle, .authorName, .publisherName
+    color: $blue !important
+
+.black
+  color: $lgrey !important
+  background-color: $blue !important
+  .book-page, .bookTitle, .authorName, .publisherName
+    color: $lgrey !important
+
+.sepia
+  color: $blue !important
+  background-color: $sepia !important
+  .book-page, .bookTitle, .authorName, .publisherName
+    color: $blue !important
+
+.application
+  background-color: darken($blue, 5%)
+
+.list-btn
+  display: block
+  width: 100%
+
+.navigation-drawer--permanent.navigation-drawer--clipped,
+.navigation-drawer--persistent.navigation-drawer--clipped,
+.navigation-drawer--permanent.navigation-drawer--floating,
+.navigation-drawer--persistent.navigation-drawer--floating
+  margin-top: 50px
+  max-height: calc(100vh - 50px)
+
+.navigation-drawer--permanent.navigation-drawer--clipped ~ .toolbar,
+.navigation-drawer--persistent.navigation-drawer--clipped ~ .toolbar,
+.navigation-drawer--permanent.navigation-drawer--floating ~ .toolbar,
+.navigation-drawer--persistent.navigation-drawer--floating ~ .toolbar,
+.navigation-drawer--permanent.navigation-drawer--clipped ~ .footer.footer--fixed,
+.navigation-drawer--persistent.navigation-drawer--clipped ~ .footer.footer--fixed,
+.navigation-drawer--permanent.navigation-drawer--floating ~ .footer.footer--fixed,
+.navigation-drawer--persistent.navigation-drawer--floating ~ .footer.footer--fixed,
+.navigation-drawer--permanent.navigation-drawer--clipped ~ .footer.footer--absolute,
+.navigation-drawer--persistent.navigation-drawer--clipped ~ .footer.footer--absolute,
+.navigation-drawer--permanent.navigation-drawer--floating ~ .footer.footer--absolute,
+.navigation-drawer--persistent.navigation-drawer--floating ~ .footer.footer--absolute
+  z-index: 5
+
+.navigation-drawer
+  overflow: hidden
+  z-index: 3
+  margin-right: -20px
+  padding: 0
+  ul.list
+    overflow-y: scroll
+    overflow-x: hidden
+    height: 100%
+    li
+      padding-top: 10px
+
+.Old-Cabin
+  font-family: 'Old Standard TT' !important
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
+    font-family: 'Cabin' !important
+
+.Raleway-Bitter
+  font-family: 'Raleway' !important
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
+    font-family: 'Bitter' !important
+
+.Ubuntu-Abel
+  font-family: 'Ubuntu' !important
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
+    font-family: 'Abel' !important
+
+.Droid-Abril
+  font-family: 'Droid Sans' !important
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
+    font-family: 'Abril Fatface' !important
+
+.Garamond-Clicker
+  font-family: 'EB Garamond' !important
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
+    font-family: 'Clicker Script' !important
+
+.Alice-Playfair
+  font-family: 'Alice' !important
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
+    font-family: 'Playfair Display' !important
+
+.Judson-Quando
+  font-family: 'Judson' !important
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
+    font-family: 'Quando' !important
+
+.bookTitle, book-content .book-page h1
+  text-align: center
+  font-size: 3rem
+  line-height: 3.5rem
+  float: none !important
+
+.bookDescription
+  font-style: italic
+
+.authorName
+  font-size: 2.5rem
+
+.authorDescription
+  font-style: italic
+
+.publisherName
+  font-size: 2rem
+  margin-top: 20px
+
+.slide-leave-active,
+.slide-enter-active
+  transition: all .3s ease
+
+.slide-enter
+  transform: translate3d(100%, 0, 0)
+  -webkit-transform: translate3d(100%, 0, 0)
+  opacity: 0
+
+.slide-leave-to
+  transform: translate3d(-100%, 0, 0)
+  -webkit-transform: translate3d(-100%, 0, 0)
+  opacity: 0
+
+.menu .menu__activator--active
+  color: #4BACB8 !important
+  background: rgba(44, 62, 80, 0) !important
+  border: 0n
+
+.inner_page h1.section,
+.inner_page h1.chapter1,
+.inner_page h1.chapter0
+  font-size: 42px
+
+.authorInfo p > span,
+.authorInfo p > em
+  font-size: 33px
+  font-family: fontFamily
+  font-style: italic
+  background-color: #f3f3f3 !important
+
+.toc span.black
+  background-color: #f3f3f3 !important
+  color: #2c3e50 !important
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// MEDIA QUERIES ///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+@media screen and (max-width:768px)
+  body
+    overflow: hidden
+  nav.main-menu,
+  .toolbar,
+  .toolbar--fixed,
+  .toolbar__content
+    button
+      width: 20vw !important
+  .nav-btn
+    display: none !important
+  ul#colors
+    button
+      border: 0
+    #white
+      color: $blue
+      border: 1px solid $white !important
+      background-color: $white !important
+    #black
+      color: $white
+      border: 1px solid $blue !important
+      background-color: $blue !important
+    #sepia
+      color: $blue
+      border: 1px solid $sepia !important
+      background-color: $sepia !important
+  .book-content
+    width: 100vw !important
+    .book-page
+      column-count: 2 !important
+      column-width: calc(100vw - 55px) !important
+  .mobile-social-btn
+    display: block
+    width: 20vw
+    span
+      display: none
+  .desktop-social-btn
+    display: none
+
+@media screen and (max-width: 450px)
+  .lib-item-size .input-group
+    width: 150px
+    position: absolute
+    right: 0
+    top: 50px
+    background-color: $white
+    box-shadow: $shadow
+    padding: 20px 10px
+  nav.main-menu,
+  .toolbar,
+  .toolbar--fixed,
+  .toolbar__content
+    button
+      width: 20vw !important
+  .settings
+    margin-top: 20px
+  .settings > ul > li:nth-child(5),
+  .settings > ul > li:nth-child(7)
+    display: none
+  .slider__thumb
+    width: 35px
+    height: 35px
+    border: 1px inset 3px solid $white
+  .book-content
+    min-width: 0
+    margin-top: 30px
+    height: 100vh
+    padding: 40px 20px 40px !important
+    .book-page
+      font-size: 14px
+      height: calc(100vh - 105px) !important
+      // height: 85vh !important
+      // margin-bottom: 200px !important
+      max-height: calc(100vh - 100px) !important
+      // margin-bottom: 200px !important
+      column-count: 1 !important
+
+@media screen and (max-width:1023px)
+  .mobile-buy-btn
+    display: block
+    span
+      display: none
+
+@media screen and (max-height:770px)
+  .book-content .book-page
+    max-height: calc(100vh - 30px) !important
+    padding-bottom: 80px !important
+    // -webkit-overflow-scrolling: auto
+
+// nav.main-menu button, .toolbar button, .toolbar--fixed button, .toolbar__content button
+  // margin: 0
+  // padding: 0 10px
+  // background-color: $white !important
+  // &:hover,
+  // &:active,
+  // &:focus
+    // background-color: $white !important
+
+// @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2)
+//   .book-page
+//     padding-bottom: 80px !important
+//     height: calc(100vh - 80px) !important
+
+
+// @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3)
+//   .book-page
+//     padding-bottom: 80px !important
+//     height: calc(100vh - 80px) !important
+
+// @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3)
+//   .book-page
+//     padding-bottom: 80px !important
+//     height: calc(100vh - 80px) !important
+
+
+
+// @media only screen and (min-device-width: 375px) and (max-device-width: 667px)
+//   .book-page
+//     padding-bottom: 105px !important
+//     // height: calc(100vh - 80px) !important
+//     height: 70vh !important
+
+// @media only screen and (min-device-width: 414px) and (max-device-width: 736px)
+//   .book-page
+//     padding-bottom: 105px !important
+//     // height: calc(100vh - 80px) !important
+//     height: 70vh !important
+
+// @media only screen and (min-device-width: 375px) and (max-device-width: 812px)
+//   .book-page
+//     padding-bottom: 105px !important
+//     // height: calc(100vh - 80px) !important
+//     height: 70vh !important
