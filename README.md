@@ -1,7 +1,8 @@
 # Vue Book Reader UI
 
-> Front-end web development with Vue Webpack PWA - Book Reader UI - e-publishing software
-[Demo](https://www.nenadbursac.com/pwa)
+> [Demo](https://www.nenadbursac.com/pwa)
+Front-end web development with Vue Webpack PWA - Book Reader UI - e-publishing software
+
 
 ## Build Setup
 
