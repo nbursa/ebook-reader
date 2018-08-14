@@ -339,14 +339,14 @@ export default {
     });
     eventHub.$on("pageNum", newValue => {
       this.pageNum = newValue;
-    eventHub.$on("ttlPages", newValue => {
-      this.ttlPages = newValue;
-    });
-      }
-    },
-    iSize: newValue => {
-      eventHub.$emit("iSizeChanged", newValue);
-    }
+      eventHub.$on("ttlPages", newValue => {
+        this.ttlPages = newValue;
+      });
+      
+    })
+    // this.iSize: newValue => {
+    //   eventHub.$emit("iSizeChanged", newValue);
+    // }
   },
   methods: {
     resetScroll() {

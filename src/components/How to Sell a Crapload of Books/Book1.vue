@@ -8,9 +8,9 @@
         How to Sell a Crapload of Books
       </h1>
       <br>
-      <a class="link" href="#example">
+      <!-- <a class="link" href="#example">
         More About Author
-      </a><br>
+      </a><br> -->
       <p class="bookDescription body article font2"><span class="drop-cap"> H</span>ow to Sell a Crapload of Books, Tim Vandehey, New York Times bestselling ghostwriter, and Naren Aryal, CEO and Publisher of Mascot Books, share 10 secrets about building a killer marketing platform that nobody else is talking about. We’re not talking commonplace, no-duh advice like “build your Twitter following” or “write a professional press release”, but straight talk. Today, being an author is about professionalism and determination, cleverness and creativity, technological savvy and old-fashioned hustle. If you want to sell books, get a publishing deal or even turn writing into a full-time career, you have to be a marketer, not just a writer. Let Tim and Naren show you how.</p>
     </div>
     <div class="authorInfo">
@@ -21,9 +21,9 @@
       <a class="authorURL body link" href="http://timvandehey.com/">
         About Author
       </a><br>
-      <a id="example" class="authorURL body link" href="http://mascotbooks.com/about/#naren">
+      <!-- <a id="example" class="authorURL body link" href="http://mascotbooks.com/about/#naren">
         More About Author
-      </a><br>
+      </a><br> -->
     </div>
     <div class="publisherInfo">
       <h2 class="publisherName heading font1">
