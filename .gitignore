@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 /.vscode/
 /books-metadata/
+/example-templates/
 
 # Editor directories and files
 .idea
