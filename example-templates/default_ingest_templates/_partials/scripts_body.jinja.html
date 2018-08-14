@@ -1,0 +1,22 @@
+<script src="//code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="{{assets_directory_absolute_url}}/js/readmore.min.js"></script>
+{#<script type="text/javascript" src="{{assets_directory_absolute_url}}/js/flowtype.js"></script>#}
+<script type="text/javascript" src="{{assets_directory_absolute_url}}/js/spn.js"></script>
+<script type="text/javascript" src="{{assets_directory_absolute_url}}/js/main.js?{{templateData.generated}}"></script>
+<script type="text/javascript">
+    var querystring = '{{templateData.generated}}';
+
+    $('a').each(function()
+    {
+        var href = $(this).attr('href');
+        if (href.match(/\#/)) {
+            var hrefArray = href.split(/\#/);
+            hrefArray[0] += (hrefArray[0].match(/\?/) ? '&' : '?') + querystring;
+            href = hrefArray.join('#');
+        } else {
+            href += (href.match(/\?/) ? '&' : '?') + querystring;
+        }
+        
+        $(this).attr('href', href);
+    });
+</script>

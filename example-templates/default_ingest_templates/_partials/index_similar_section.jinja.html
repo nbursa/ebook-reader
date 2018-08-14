@@ -1,0 +1,12 @@
+{% if templateData.similarBooks %}
+    <div class="similarBooks">
+        <h2 class="heading font1">
+            Other Books by Author
+        </h2>
+        {% for link in templateData.similarBooks %}
+            <a class="body link" href="{{ link }}">
+                {{ link }}
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}

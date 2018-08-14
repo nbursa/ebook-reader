@@ -1,0 +1,37 @@
+<div id="topPanel">
+<nav id="menu">
+    <ul>
+        {% if(sample.navigation.previousURL) %}
+            <li>
+                <a class="dirlink previous" href="{{ sample.navigation.previousURL }}">
+                    <span class="fa fa-angle-left"> </span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% include templateDir+"social_buttons.jinja.html" ignore missing with context %}
+
+        {% if(sample.navigation.isHome) %}
+        {% else %}
+            <li class="home">
+                <a class="homeSection" href="{{ sample.navigation.homeURL }}">
+                    <span class="fa fa-home"></span>
+                </a>
+            </li>
+        {% endif %}
+        
+        <li class="activeSection">
+            <span>{{ pageTitle }}</span>
+        </li>
+        {% if(sample.navigation.nextURL) %}
+        <li>
+            <a class="dirlink next" href="{{ sample.navigation.nextURL }}">
+                <span class="fa fa-angle-right"> </span>
+            </a>
+        </li>
+        {% endif %}
+
+    </ul>
+</nav>
+</div>
+{% include templateDir+'purchase_widget.jinja.html' %}

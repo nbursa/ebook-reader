@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{ sample.title }}</title>
+  <meta charset="UTF-8" />
+  <meta name="keywords" content="{{sample.keywords}}" />
+  <link rel="shortcut icon" href="{{ assets_directory_absolute_url }}/favicon.ico" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#2c3e50">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#2c3e50">
+  <meta name="apple-mobile-web-app-title" content="{{ sample.title }}">
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="msapplication-TileColor" content="#2c3e50">
+   {% include templateDir+'_partials/css_head.jinja.html' %} {% include templateDir+'_partials/social_head.jinja.html' %}
+</head>
+
+<body class="hp">
+  {% include 'all_pages_after_body.jinja.html' %} {% include templateDir+'_partials/menu.jinja.html' %} {% include templateDir+'_partials/index_cover_section.jinja.html'
+  %}
+  <div class="bookInfo">
+    <h1 class="bookTitle heading font1">
+      {{ sample.title }}
+    </h1>
+    {% if sample.description %}
+    <div class="bookDescription body article font2">{{ sample.description }}</div>
+    {% endif %}
+  </div>
+  {% include templateDir+'_partials/index_author_section.jinja.html' %} {% include templateDir+'_partials/index_publisher_section.jinja.html'
+  %} {% include templateDir+'_partials/index_similar_section.jinja.html' %} {#{% include templateDir+'_partials/index_toc_section.jinja.html'
+  %}#} {% include templateDir+'_partials/scripts_body.jinja.html' %}
+</body>
+
+</html>

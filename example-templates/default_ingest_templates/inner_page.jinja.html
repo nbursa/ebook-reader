@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="keywords" content="{{sample.keywords}}" />
+  <link rel="shortcut icon" href="https://www.textcafe.com/favicon.ico" />
+  {% include templateDir+'_partials/css_head.jinja.html' %}
+  {{ originalPage.headContent|safe }}
+  {% include templateDir+'_partials/social_head.jinja.html' %}
+
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/favicon.ico">
+  
+</head>
+<body {{originalPage.bodyTagAttributesString|safe}}>
+  {% include 'all_pages_after_body.jinja.html' %}
+  {% include templateDir+'_partials/menu.jinja.html' %}
+  <div class="inner_page">
+      {{ originalPage.bodyContent|safe }}
+  </div>
+  {% include templateDir+'_partials/scripts_body.jinja.html' %}
+</body>
+</html>

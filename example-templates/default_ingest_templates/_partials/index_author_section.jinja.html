@@ -1,0 +1,14 @@
+<div  class="authorInfo">
+   <h2 class="authorName heading font1">
+    {{author.name}}
+   </h2>
+    {% if author.description %}
+    <p class="authorDescription body article">{{ author.description }}</p>
+    {% endif %}
+   {% for link in author.links %}
+   <a class="authorURL body link" href="{{link.url}}">
+{#    {{link.domain}} URL#}
+       {% if loop.index0 > 0 %} More {% endif %} About Author
+   </a>
+{% endfor %}
+  </div>

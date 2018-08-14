@@ -1,0 +1,7 @@
+<div class="purchaseInfo sidewidget">
+	{% for url in purchaseURLs%}
+	<a target="_blank" class="purchaseURL {{url.customClass}}" href="{{url.literal}}">
+		<img class="purchaseIcon" src="{{url.faviconLink}}"/>
+	</a>
+	{% endfor %}
+</div>

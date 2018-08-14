@@ -1,0 +1,36 @@
+ /*jshint esversion: 6 */
+
+ import Vue from 'vue'
+ import Router from 'vue-router'
+ import Reader from '@/components/Reader'
+ import Home from '@/components/home'
+{{#routes}}
+ import {{component}} from '@/components{{path}}'
+{{/routes}}
+import Last from '@/components/last'
+
+Vue.use(Router)
+
+export default new Router({
+	routes: [
+	{
+ 			"path" : "/",
+ 			"name" : "home",
+ 			"component" : Home
+ 		},
+	{{#routes}}
+		{{#visible}}
+ 		{
+ 			"path" : "{{path}}",
+ 			"name" : "{{name}}",
+ 			"component" : {{component}}
+ 		},
+ 		{{/visible}}
+	{{/routes}}
+		{
+ 			"path" : "/last",
+ 			"name" : "last",
+ 			"component" : Last
+ 		},
+	]
+})

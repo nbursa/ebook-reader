@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>PWA VueJS Webpack Reader</title>
+  <!-- <title>{{ sample.title }}</title> -->
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+
+  <meta name="theme-color" content="#4BACB8">
+  <meta name="msapplication-TileColor" content="#4BACB8">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#4BACB8">
+  <meta name="apple-mobile-web-app-title" content="PWA VueJS Webpack Reader">
+  <!-- <meta name="apple-mobile-web-app-title" content="{{ sample.title }}"> -->
+  <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.files.publicPath %>static/img/favicon.ico">
+
+  <!-- <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="https:{{ sample.protocolRelativeURL }}?{{templateData.generated}}">
+  <meta name="twitter:creator" content="https:{{ sample.protocolRelativeURL }}?{{templateData.generated}}">
+  <meta name="twitter:title" content="{{ sample.title }}">
+  <meta name="twitter:description" content="{{ templateData.facebookSocialMessage | default(sample.description)|e }}">
+  <meta name="twitter:image" content="https:{{ sample.coverimage.protocolRelativeURL }}?{{templateData.generated}}"> -->
+
+  <!-- {{! Facebook https://developers.facebook.com/docs/sharing/webmasters#markup }}
+  {{! TODO: options.fb.app_id supplied by publisher or configured }}
+  <meta property="fb:app_id" content="1856957117862941"/>
+  <meta property="og:url" content="https:{{ sample.protocolRelativeURL }}?{{templateData.generated}}"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="{{ sample.title }}"/>
+  <meta property="og:description" content="{{ templateData.facebookSocialMessage | default(sample.description)|e }}"/>
+  <meta property="og:image" content="https:{{ sample.coverimage.protocolRelativeURL }}?{{templateData.generated}}"/>
+  <meta property="og:updated_time" content="{{ templateData.generated }}"/> -->
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css"> -->
+  <link rel="icon" type="image/png" sizes="48x48" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/favicon.ico">
+  <link rel="manifest" href="<%= htmlWebpackPlugin.files.publicPath %>static/manifest.json">
+  <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/favicon.ico">
+  <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.publicPath %>static/css/fonts.min.css" />
+  <!-- <link rel="preload" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" as="style" /> -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
+
+  <link rel="preload" href="static/css/ionicons.min.css" as="style" />
+  <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.publicPath %>static/css/ionicons.min.css" />
+  
+  <link rel="stylesheet" type="text/css" href="<%= htmlWebpackPlugin.files.publicPath %>static/css/print.css" media="print" />
+
+  <link rel="preload" href="https://fonts.googleapis.com/icon?family=Material+Icons" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <% for (var chunk of webpack.chunks) {
+        for (var file of chunk.files) {
+          if (file.match(/\.(js|css)$/)) { %>
+    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>">
+    <% }}} %>
+</head>
+
+<body>
+  <noscript>Enable JavaScript</noscript>
+  <div id="app"></div>
+  <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
+</body>
+
+</html>

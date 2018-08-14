@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-75414954-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-75414954-1');
+  </script>
+
+  <title>{{ sample.title }}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+
+  <meta name="theme-color" content="#4BACB8">
+  <meta name="msapplication-TileColor" content="#4BACB8">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#4BACB8">
+  <meta name="apple-mobile-web-app-title" content="{{ sample.title }}">
+  <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.files.publicPath %>img/favicon.ico">
+  
+  <meta name="author" content="{{author.name}}">
+  <meta name="web_author" content="{{publisher.name}}">
+  <meta name="contact" content="support@textcafe.com">
+  <meta name="copyright" content="{{author.name}}">
+  
+  <meta name="Description" content="{{#templateData.facebookSocialMessage}}{{templateData.facebookSocialMessage}}{{/templateData.facebookSocialMessage}} {{#sample.description}}{{!sample.description}}{{/sample.description}}"/>
+  <meta name="revisit-after" content="7 days">
+  <meta name="abstract" content="{{#templateData.facebookSocialMessage}}{{templateData.facebookSocialMessage}}{{/templateData.facebookSocialMessage}}">
+  <meta name="distribution" content="global">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{ sample.protocolRelativeURL }}?{{templateData.generated}}">
+  {{! <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-64435914-1', 'auto');
+    ga('send', 'pageview');
+  </script> }}
+
+  <meta property="fb:app_id" content="1856957117862941"/>
+  <meta property="og:url" content="https:{{ sample.protocolRelativeURL }}?{{templateData.generated}}"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="{{ sample.title }}"/>
+  <meta property="og:description" content="{{#templateData.facebookSocialMessage}}{{templateData.facebookSocialMessage}}{{/templateData.facebookSocialMessage}} {{#sample.description}}{{!sample.description}}{{/sample.description}}"/>
+  <meta property="og:image" content="https:{{ sample.coverimage.protocolRelativeURL }}?{{templateData.generated}}"/>
+  <meta property="og:updated_time" content="{{ templateData.generated }}"/>
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="https:{{ sample.protocolRelativeURL }}?{{templateData.generated}}">
+  <meta name="twitter:creator" content="https:{{ sample.protocolRelativeURL }}?{{templateData.generated}}">
+  <meta name="twitter:title" content="{{ sample.title }}">
+  <meta name="twitter:description" content="{{#templateData.facebookSocialMessage}}{{templateData.facebookSocialMessage}}{{/templateData.facebookSocialMessage}} {{#sample.description}}{{!sample.description}}{{/sample.description}}">
+  <meta name="twitter:image" content="https:{{ sample.coverimage.protocolRelativeURL }}?{{templateData.generated}}">
+
+  <link rel="icon" type="image/png" sizes="48x48" href="<%= htmlWebpackPlugin.files.publicPath %>img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>img/favicon.ico">
+
+  <link rel="manifest" href="<%= htmlWebpackPlugin.files.publicPath %>manifest.json">
+  <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.files.publicPath %>img/favicon.ico">
+  <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.publicPath %>css/fonts.min.css" />
+
+  <link rel="preload" href="<%= htmlWebpackPlugin.files.publicPath %>css/ionicons.min.css" as="style" />
+  <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.publicPath %>css/ionicons.min.css" />
+
+  <link rel="stylesheet" type="text/css" href="<%= htmlWebpackPlugin.files.publicPath %>css/print.css" media="print" />
+
+  <link rel="preload" href="https://fonts.googleapis.com/icon?family=Material+Icons" as="style" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+  <% for (var chunk of webpack.chunks) {
+        for (var file of chunk.files) {
+          if (file.match(/\.(js|css)$/)) { %>
+  <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>">
+  <% }}} %>
+</head>
+
+<body>
+  <noscript>Please enable JavaScript in your browser.</noscript>
+  {{! <noscript>"<iframe src="//www.googletagmanager.com/ns.html?id=GTM-W779BW" height="0" width="0" style="display:none;visibility:hidden"></iframe>"</noscript>
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true; j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W779BW');
+  </script> }}
+  <div id="app"></div>
+  <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<template>
+  <div class="book">
+    <div class="coverInfo">
+      <img class="coverImage" src="{{sample.coverimage.protocolRelativeURL}}" />
+    </div>
+    <div class="bookInfo">
+      <h1 class="bookTitle heading font1">{{sample.title}}
+      </h1>
+      <p class="bookDescription body article font2">
+        {{sample.description}}
+      </p>
+    </div>
+    <div class="authorInfo">
+      <h2 class="authorName heading font1">
+        {{author.name}}
+      </h2>
+      {% if author.description %}
+      <p class="authorDescription body article">{{author.description}}</p>
+      {% endif %}
+      {% for link in author.links %}
+         <a class="authorURL body link" href="{{link.url}}">
+      {#    {{link.domain}} URL#}
+             {% if loop.index0 > 0 %} More {% endif %} About Author
+         </a>
+      {% endfor %}
+    </div>
+    <div class="publisherInfo">
+     <h2 class="publisherName heading font1">
+      {{publisher.name}}
+     </h2>
+        {% if publisher.description %}
+            <p class="publisherDescription body article">{{ publisher.description }}</p>
+        {% endif %}
+        {% for link in publisher.links %}
+     <a class="publisherURL body link" href="{{link.url}}">
+  {#    {{link.domain}} URL#}
+         {% if loop.index0 > 0 %} More {% endif %} About Publisher
+     </a>
+  {% endfor %}
+     
+    </div>
+  </div>
+</template>
+
+<script>
+// import Navigation from '@/components/Navigation'
+export default {
+  name: 'home',
+  data() {
+    return {}
+  },
+  components: {
+    // 'navigation': Navigation
+  }
+}
+</script>

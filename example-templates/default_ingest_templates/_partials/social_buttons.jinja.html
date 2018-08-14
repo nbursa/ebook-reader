@@ -1,0 +1,42 @@
+{#http://guerillalabs.co/blog/social-sharing.html#}
+{% if(templateData.linkedinSocialMessageToggle) %}
+    {# Linkedin https://developer.linkedin.com/docs/share-on-linkedin #}
+    <li class="social">
+        <a target="_blank" class="sharelink" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https:{{ sample.protocolRelativeURL|urlencode }}%3F{{templateData.generated|urlencode}}&amp;title={{ sample.title|urlencode }}&amp;summary={{ templateData.linkedinSocialMessage | default(sample.description)|truncate|urlencode }}&amp;source=LinkedIn">
+{#        <img src="{{ path_to_images}}/linkedin.png" alt="Share on Linkedin"/>#}
+        <span class="linkedin-icon fa fa-linkedin-square"> </span>
+    </a>
+</li>
+{% endif %}
+{% if(templateData.twitterSocialMessageToggle) %}
+<li class="social">
+    {# Twitter https://dev.twitter.com/web/tweet-button/web-intent #}
+    <a target="_blank" class="sharelink" href="https://twitter.com/intent/tweet?text={{ templateData.twitterSocialMessage | default(sample.description)|truncate(144)|urlencode }}&amp;url=https:{{ sample.protocolRelativeURL|urlencode }}%3F{{templateData.generated|urlencode}}&amp;via=textcafecom">
+        <span class="twitter-icon fa fa-twitter-square"> </span>
+    </a>
+</li>
+{% endif %}
+{% if(templateData.facebookSocialMessageToggle) %}
+<li class="social">
+    {# Facebook https://developers.facebook.com/docs/sharing/reference/share-dialog #}
+    <a target="_blank" class="sharelink" href="https://www.facebook.com/sharer/sharer.php?u=https:{{ sample.protocolRelativeURL|urlencode }}%3F{{templateData.generated|urlencode}}">
+        <span class="facebook-icon fa fa-facebook-square"> </span>
+    </a>
+</li>
+{% endif %}
+{% if(templateData.tumblrSocialMessageToggle) %}
+    <li class="social">
+        {# tumblr https://www.tumblr.com/docs/en/share_button#canonical-url #}
+        <a target="_blank" class="sharelink" href="https://www.tumblr.com/widgets/share/tool?canonicalUrl=https:{{ sample.protocolRelativeURL|urlencode }}%3F{{templateData.generated|urlencode}}&posttype=link&caption={{ templateData.tumblrSocialMessage | default(sample.description)|truncate|urlencode }}">
+            <span class="tumblr-icon fa fa-tumblr-square"> </span>
+        </a>
+    </li>
+{% endif %}
+{% if(templateData.pinterestSocialMessageToggle) %}
+    <li class="social">
+        {# pinterest https://developers.pinterest.com/tools/widget-builder/ #}
+        <a target="_blank" class="sharelink" href="http://www.pinterest.com/pin/create/button/?url=https:{{ sample.protocolRelativeURL|urlencode }}%3F{{templateData.generated|urlencode}}&description={{ templateData.pinterestSocialMessage | default(sample.description)|truncate|urlencode }}&media=https:{{ sample.coverimage.protocolRelativeURL }}">
+            <span class="pinterest-icon fa fa-pinterest-square"> </span>
+        </a>
+    </li>
+{% endif %}

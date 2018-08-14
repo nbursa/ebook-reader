@@ -1,0 +1,562 @@
+<template>
+  <div class="wrap" :style="{ 'filter': 'brightness(' + brightness + '%)'}">
+    <v-progress-linear v-model="progress"></v-progress-linear>
+    <v-btn :style="{width: (100 - widthSize) + '%'}" class="nav-btn left" @click.stop="prev" v-shortkey="['arrowleft']" @shortkey="prev" :ripple="false">
+      <v-icon :style="{'left': (widthSize / 3.5) + '%'}">ion-ios-arrow-left</v-icon>
+    </v-btn>
+    <v-btn :style="{width: (100 - widthSize) + '%'}" class="nav-btn right" @click.stop="next" v-shortkey="['arrowright']" @shortkey="next" :ripple="false">
+      <v-icon :style="{'right': (widthSize / 3.5) + '%'}">ion-ios-arrow-right</v-icon>
+    </v-btn>
+    <div class="book-content" :style="{'width': widthSize + '%', 'background-color': currentColor}"  @mouseenter="over" @mouseleave="out">
+      <v-touch :class="{active: hiddenEl}" class="touch-swipe" @swipeleft="next" @swiperight="prev" @tap="tapped"></v-touch>
+      <div class="book-page" :class="fontFamily" :style="{ 'font-size': fontSize + 'px', 'columns': cols }" :key="div" enable-resize-watcher @tap="tappedIn" @swipe="tappedIn" @click="tappedIn">
+        <transition :name="routeTransition" mode="out-in">
+          <router-view class="view" :key="$route.name"></router-view>
+        </transition>
+      </div>
+    </div>
+    <footer :class="fontFamily" :style="{ 'font-size': (fontSize - 5) + 'px' }">
+      <div v-if="brandReaderUrl">
+      <v-btn flat class="HC-footer-button" @click.native.stop="drawer = false, info = false, buyMenu = false, socialMenu = false, drawerRight = false, otherBooks = false" :ripple="false" tag="a" :href="brandReaderUrl" target="_blank">
+        <i><img :src="brandLogoUrl"></i>
+      </v-btn>
+      </div>
+      <v-spacer></v-spacer>
+      <div class="foots">
+      {{=<% %>=}}
+      <span><em>{{ this.$route.name }}</em></span> - page <span><em>{{ this.pageNumber }}</em></span> <span v-if="this.totalPages > 1"><em>{{ "/ " + this.totalPages }}</em></span>
+      <%={{ }}=%>
+      </div>
+      <v-spacer></v-spacer>
+    </footer>  
+  </div>
+</template>
+
+<script>
+import eventHub from "../event-hub.js";
+import Settings from "../components/Settings";
+
+var SLIDE_TIME = document.documentElement.clientWidth > 480 ? 500 : 300;
+
+export default {
+  name: "reader",
+  props: {
+    value1: {
+      type: Number,
+      default: 22
+    },
+    selected: {
+      type: String
+    },
+    ex8: {
+      type: String,
+      default: "Auto"
+    },
+    value2: {
+      type: Number
+    },
+    value3: {
+      type: Number,
+      default: 100
+    }
+  },
+  data() {
+    return {
+      pageNum: 0,
+      pageNumber: 1,
+      ttlPages: 0,
+      totalPages: 0,
+      home: false,
+      div: 0,
+      prevX: null,
+      xDownEnd: null,
+      fontSize: this.value1,
+      fontFamily: this.selected,
+      columns: this.ex8,
+      widthSize: this.value2,
+      brightness: this.value3,
+      currentColor: "#f3f3f3",
+      cols: "2 220px",
+      position: { scrollTop: 0, scrollLeft: 0 },
+      offset: null,
+      isOver: false,
+      routeNames: [
+        "home",
+          {{#routes}}
+          {{#visible}}
+        "{{{name}}}",
+          {{/visible}}
+          {{/routes}}
+        "last"
+      ],
+      routeTransition: "slide-left",
+      rest: true,
+      selectedView: "Book1",
+      progress: 0,
+      hiddenEl: false,
+      brandReaderUrl: "{{templateData.brandReaderUrl}}",
+      brandLogoUrl: "{{templateData.brandLogoUrl}}",
+      currentUrl: "https:{{{sample.protocolRelativeURL}}}"
+    };
+  },
+  created: function() {
+    
+    this.getTtlPages();
+    // console.log("created");
+
+    if (document.documentElement.offsetWidth >= 768) {
+      this.hiddenEl = true;
+    } else {
+      this.hiddenEl = false;
+    }
+
+    document.addEventListener("mousewheel", this.onScroll, false);
+
+    this.$router.options.routes.forEach(route => {
+      this.routeNames.push(route.name);
+    });
+    eventHub.$on("fontSizeChanged", newValue => {
+      this.fontSize = newValue;
+    });
+    eventHub.$on("fontFamilyChanged", newValue => {
+      this.fontFamily = newValue;
+    });
+    eventHub.$on("columnsCountChanged", newValue => {
+      this.columns = newValue;
+      if (this.columns === "Single") {
+        this.cols = "1 auto";
+      } else if (this.columns === "Auto") {
+        this.cols = "2 220px";
+      }
+    });
+    eventHub.$on("widthChanged", newValue => {
+      this.widthSize = newValue;
+    });
+    eventHub.$on("brightnessChanged", newValue => {
+      this.brightness = newValue;
+    });
+  },
+
+  destroyed: function() {
+    document.removeEventListener("mousewheel", this.onScroll, false);
+    this.getTtlPages();
+  },
+  updated() {
+    this.getTtlPages();
+
+    var links = document.getElementsByTagName("a");
+    for (var i = 0; i < links.length; i++) {
+      var that = this;
+      var url = "/" + document.location.hash.split("#/")[1];
+      if (links[i].href.split("#")[1] === url) {
+        links[i].style.textDecoration = "underline";
+        links[i].style.textDecorationStyle = "dotted";
+        links[i].onclick = function(e) {
+          e.preventDefault();
+          var refr = this.href.split("#")[2];
+          that.linkTo(refr);
+        }; 
+      };
+    };
+
+  },
+  mounted() {
+
+    var links = document.getElementsByTagName("a");
+    for (var i = 0; i < links.length; i++) {
+      var that = this;
+      var url = "/" + document.location.hash.split("#/")[1];
+      if (links[i].href.split("#")[1] === url) {
+        links[i].style.textDecoration = "underline";
+        links[i].style.textDecorationStyle = "dotted";
+        links[i].onclick = function(e) {
+          e.preventDefault();
+          var refr = this.href.split("#")[2];
+          that.linkTo(refr);
+        };
+      };
+    };
+
+    this.getTtlPages();
+
+    var bgColor = document.getElementsByClassName("book-content")[0].style
+        .backgroundColor,
+      hexDigits = new Array(
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      );
+    function rgb2hex(rgb) {
+      rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+      return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    }
+    function hex(x) {
+      return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+    }
+    this.currentColor = rgb2hex(bgColor);
+  },
+  watch: {
+    $route(to, from, next) {
+      var toDepth = this.routeNames.indexOf(to.name);
+      var fromDepth = this.routeNames.indexOf(from.name);
+      this.routeTransition = toDepth < fromDepth ? "slide-right" : "slide-left";
+
+      this.progress = 0;
+      this.pageNumber = 1;
+    },
+    pageNum: newValue => {
+      eventHub.$emit("pageNum", newValue);
+    },
+    ttlPages: newValue => {
+      eventHub.$emit("ttlPages", newValue);
+    }
+  },
+  methods: {
+    linkTo(refName) {
+      var element = document.getElementById(refName);
+      var elementOffset = Math.ceil(element.offsetLeft);
+      var page = this.$el.querySelector(".book-page");
+      var gap = parseInt(
+        window.getComputedStyle(page).getPropertyValue("column-gap"),
+        10
+      );
+      var onStart = Math.ceil(page.scrollLeft);
+      //var onStartPage = Math.floor(onStart / (page.offsetWidth + gap));
+      var destinationOffset = Math.floor(
+        elementOffset / (page.offsetWidth + gap)
+      );
+      var target = (destinationOffset * (page.offsetWidth + gap)) - onStart;
+      if (destinationOffset + 1 !== this.pageNumber) {
+        this.scrollIt(target, 300, "easeOutQuad", false);
+        const scrollArea = page.scrollWidth - page.offsetWidth;
+        var pctScrolled = Math.floor(
+          destinationOffset * (page.offsetWidth + gap) / scrollArea * 100
+        );
+        this.progress = pctScrolled;
+        this.pageNumber = destinationOffset + 1;
+      }
+    },
+    getTtlPages() {
+      this.$nextTick(function() {
+        var page = this.$el.querySelector(".book-page");
+
+        var gap = parseInt(
+          window.getComputedStyle(page).getPropertyValue("column-gap"),
+          10
+        );
+
+        const scrollArea = page.scrollWidth - page.offsetWidth;
+        var ttlPages = Math.round(scrollArea / (page.offsetWidth + gap));
+        this.ttlPages = ttlPages;
+        this.totalPages = this.ttlPages + 1;
+      });
+    },
+    tapped() {
+      var el = this.$el.querySelector(".touch-swipe");
+      this.hiddenEl = !this.hiddenEl;
+    },
+    tappedIn() {
+      var el = this.$el.querySelector(".touch-swipe");
+      this.hiddenEl = !this.hiddenEl;
+    },
+    scrollIt(destination, duration = 200, easing = "easeInOutQuart", callback) {
+      const easings = {
+        linear(t) {
+          return t;
+        },
+        easeInQuad(t) {
+          return t * t;
+        },
+        easeOutQuad(t) {
+          return t * (2 - t);
+        },
+        easeInOutQuad(t) {
+          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        },
+        easeInCubic(t) {
+          return t * t * t;
+        },
+        easeOutCubic(t) {
+          return --t * t * t + 1;
+        },
+        easeInOutCubic(t) {
+          return t < 0.5
+            ? 4 * t * t * t
+            : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+        },
+        easeInQuart(t) {
+          return t * t * t * t;
+        },
+        easeOutQuart(t) {
+          return 1 - --t * t * t * t;
+        },
+        easeInOutQuart(t) {
+          return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t;
+        },
+        easeInQuint(t) {
+          return t * t * t * t * t;
+        },
+        easeOutQuint(t) {
+          return 1 + --t * t * t * t * t;
+        },
+        easeInOutQuint(t) {
+          return t < 0.5
+            ? 16 * t * t * t * t * t
+            : 1 + 16 * --t * t * t * t * t;
+        }
+      };
+
+      var page = this.$el.querySelector(".book-page");
+      var gap = parseInt(
+          window.getComputedStyle(page).getPropertyValue("column-gap"),
+          10
+        ),
+        offset = page.offsetWidth + gap;
+
+      // const start = page.scrollLeft;
+      const start = Math.ceil(page.scrollLeft);
+
+      const startTime =
+        "now" in window.performance ? performance.now() : new Date().getTime();
+
+      const documentWidth = Math.max(
+        page.scrollWidth || page.offsetWidth || page.clientWidth
+      );
+
+      const windowWidth = window.innerWidth || window.clientWidth;
+
+      const destinationOffsetToScroll = start + destination;
+
+      function scroll() {
+        const now =
+          "now" in window.performance
+            ? performance.now()
+            : new Date().getTime();
+        const time = Math.min(1, (now - startTime) / duration);
+        const timeFunction = easings[easing](time);
+        page.scroll(
+          Math.ceil(timeFunction * (destinationOffsetToScroll - start) + start),
+          0
+        );
+        if (timeFunction === 1 || start === destinationOffsetToScroll) {
+          if (callback) {
+            callback();
+          }
+          return;
+        }
+        requestAnimationFrame(scroll);
+      }
+      scroll();
+    },
+
+    next: function(e) {
+      var el = this.$el.querySelector(".touch-swipe");
+      el.style.pointerEvents = "auto";
+      var book = this.$el.querySelector(".book-content");
+      var page = this.$el.querySelector(".book-page"),
+        gap = parseInt(
+          window.getComputedStyle(page).getPropertyValue("column-gap"),
+          10
+        ),
+        offset = page.offsetWidth + gap,
+        index = this.routeNames.indexOf(this.$route.name);
+
+      const scrollArea = page.scrollWidth - page.offsetWidth;
+      const windowWidth = window.innerWidth || window.clientWidth;
+      var trackLength = scrollArea - (page.offsetWidth + gap);
+
+      // var pageNum = Math.floor(page.scrollLeft / (page.offsetWidth + gap));
+      const scrollLeft = Math.ceil(page.scrollLeft);
+      var pageNum = Math.floor(scrollLeft / (page.offsetWidth + gap));
+
+      this.pageNum = pageNum;
+
+      pageNum += 1;
+
+      this.pageNumber += 1;
+
+      if (
+        page.scrollWidth - (scrollLeft + page.offsetWidth) !== 0 &&
+        pctScrolled !== 100
+      ) {
+        var currentPage = Math.floor(pageNum * (page.offsetWidth + gap));
+
+        var nextPage = Math.floor(pageNum * (page.offsetWidth + gap));
+
+        var destination = nextPage - scrollLeft;
+
+        this.scrollIt(destination, 300, "easeOutQuad", false);
+
+      } else {
+        this.$router.push({ name: this.routeNames[index + 1] });
+
+        this.pageNumber = 1;
+        pageNum = 0;
+        var pctScrolled = Math.floor(
+          pageNum * (page.offsetWidth + gap) / scrollArea * 100
+        );
+        this.progress = pctScrolled;
+      }
+      var pctScrolled = Math.floor(
+        pageNum * (page.offsetWidth + gap) / scrollArea * 100
+      );
+      this.progress = pctScrolled;
+    },
+    prev: function(e) {
+      var el = this.$el.querySelector(".touch-swipe");
+      el.style.pointerEvents = "auto";
+
+      var page = this.$el.querySelector(".book-page"),
+        gap = parseInt(
+          window.getComputedStyle(page).getPropertyValue("column-gap"),
+          10
+        ),
+        offset = page.offsetWidth + gap,
+        index = this.routeNames.indexOf(this.$route.name);
+
+      const scrollArea = page.scrollWidth - page.offsetWidth;
+
+      // var pageNum = Math.round(page.scrollLeft / (page.offsetWidth + gap));
+      const scrollLeft = Math.ceil(page.scrollLeft);
+      var pageNum = Math.round(scrollLeft / (page.offsetWidth + gap));
+      var ttlPages = Math.round(scrollArea / (page.offsetWidth + gap));
+
+      // const scrollLeft = Math.ceil(page.scrollLeft);
+
+      // var pageNum = Math.round(scrollLeft / (page.offsetWidth + gap));
+
+      this.pageNum = pageNum;
+
+      this.pageNumber -= 1;
+
+      var currentPage = Math.floor(pageNum * (page.offsetWidth + gap));
+
+      if (scrollLeft !== 0 && pageNum !== 0) {
+        var pageNum = Math.round(scrollLeft / (page.offsetWidth + gap));
+        var pageNumber = Math.floor(scrollLeft / (page.offsetWidth + gap));
+
+        pageNum -= 1;
+        var prevPage = Math.floor(pageNum * (page.offsetWidth + gap));
+
+        var destination = -1 * (scrollLeft - prevPage);
+
+        this.scrollIt(destination, 300, "easeOutQuad", false);
+
+      } else {
+        this.$router.push({ name: this.routeNames[index - 1] });
+
+        this.pageNumber = 1;
+
+        pageNum = 0;
+        var pctScrolled = Math.floor(
+          pageNum * (page.offsetWidth + gap) / scrollArea * 100
+        );
+        this.progress = pctScrolled;
+      }
+      var pctScrolled = Math.floor(
+        pageNum * (page.offsetWidth + gap) / scrollArea * 100
+      );
+      this.progress = pctScrolled;
+    },
+    over: function() {
+      this.isOver = true;
+    },
+    out: function() {
+      this.isOver = false;
+    },
+    onScroll: function(e, position) {
+      this.position = position;
+      if (this.isOver === true) {
+        var page = this.$el.querySelector(".book-page"),
+          gap = parseInt(
+            window.getComputedStyle(page).getPropertyValue("column-gap"),
+            10
+          ),
+          deltaX = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail)),
+          end = page.scrollWidth - (page.scrollLeft + page.offsetWidth),
+          offset = page.offsetWidth + gap;
+
+        const scrollArea = page.scrollWidth - page.offsetWidth;
+        var pageNum = Math.round(page.scrollLeft / (page.offsetWidth + gap));
+
+        var pctScrolled = Math.floor(
+          pageNum * (page.offsetWidth + gap) / scrollArea * 100
+        );
+        this.progress = pctScrolled;
+
+        if (deltaX === 1) {
+          if (page.scrollLeft !== 0) {
+            pageNum -= 1;
+
+            this.pageNumber -= 1;
+            var prevPage = Math.floor(pageNum * (page.offsetWidth + gap));
+
+            var destination = -1 * (page.scrollLeft - prevPage);
+
+            this.scrollIt(destination, 300, "easeOutQuad", false);
+
+            var pctScrolled = Math.floor(
+              pageNum * (page.offsetWidth + gap) / scrollArea * 100
+            );
+            this.progress = pctScrolled;
+          }
+        } else if (deltaX === -1) {
+          if (page.scrollWidth - (page.scrollLeft + page.offsetWidth) !== 0) {
+            pageNum += 1;
+
+            this.pageNumber += 1;
+            var nextPage = Math.floor(pageNum * (page.offsetWidth + gap));
+
+            var destination = nextPage - page.scrollLeft;
+
+            this.scrollIt(destination, 300, "easeOutQuad", false);
+
+            var pctScrolled = Math.floor(
+              pageNum * (page.offsetWidth + gap) / scrollArea * 100
+            );
+            this.progress = pctScrolled;
+          }
+        }
+      } else {
+        return;
+      }
+    },
+    fadeIn: function() {
+      var page = this.$el.querySelector(".book-page");
+      page.style.opacity = 0;
+      var last = +new Date();
+      var tick = function() {
+        page.style.opacity = +page.style.opacity + (new Date() - last) / 400;
+        last = +new Date();
+        if (+page.style.opacity < 1) {
+          (window.requestAnimationFrame && requestAnimationFrame(tick)) ||
+            setTimeout(tick, 16);
+        }
+      };
+      tick();
+    },
+
+    resetScroll: function() {
+      var page = this.$el.querySelector(".book-page");
+      page.scrollLeft = 0;
+    }
+  },
+  computed: {},
+  components: {
+    Settings
+  }
+};
+</script>
