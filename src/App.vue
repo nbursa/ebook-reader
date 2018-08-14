@@ -339,17 +339,9 @@ export default {
     });
     eventHub.$on("pageNum", newValue => {
       this.pageNum = newValue;
-    });
     eventHub.$on("ttlPages", newValue => {
       this.ttlPages = newValue;
     });
-  },
-  watch: {
-    $route(to, from) {
-      if (to.path === "/") {
-        this.home = this.$route.path;
-      } else {
-        this.home = null;
       }
     },
     iSize: newValue => {
@@ -388,7 +380,6 @@ export default {
 <style lang="sass" src="../static/style.sass"></style>
 
 <style lang="sass">
-
 .pager
   position: absolute
   left: 50%
