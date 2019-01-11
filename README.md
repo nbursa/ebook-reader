@@ -1,4 +1,4 @@
-# TextCafe E-Book Reader
+# E-Book Reader
 
 > A Vuejs Book Reader project
 
