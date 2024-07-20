@@ -1,4 +1,5 @@
 # E-Book Reader
+<img width="1451" alt="Screenshot 2024-07-20 at 10 46 55" src="https://github.com/user-attachments/assets/2aaff208-5e3e-40fa-9c27-ee285838fa48">
 
 > A Vuejs Book Reader project
 
