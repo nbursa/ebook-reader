@@ -1,9 +1,11 @@
-# E-Book Reader
-<img width="1451" alt="Screenshot 2024-07-20 at 10 46 55" src="https://github.com/user-attachments/assets/2aaff208-5e3e-40fa-9c27-ee285838fa48">
+# E-Book Reader - [Demo](https://textcafe.co/books/FAoLSq/?1665166991518)
 
-[Demo](https://textcafe.co/books/FAoLSq/?1665166991518)
+---
+<img width="1451" alt="Screenshot 2024-07-20 at 10 46 55" src="https://github.com/user-attachments/assets/2aaff208-5e3e-40fa-9c27-ee285838fa48">
+---
 
 > A Vuejs Book Reader project
+---
 
 ## Build Setup
 
@@ -23,9 +25,7 @@ npm run build --report
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-
-
-------------------------------
+---
 
 ## Updating style.sass and ms_templates
 
