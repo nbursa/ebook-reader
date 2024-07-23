@@ -4,7 +4,7 @@
 
 > A Vue.js Book Reader project
 
-A Vue.js-based e-publishing reader for books, comics, brochures, posters, and more. This project has been in production for 6 years without any maintenance, showcasing its robustness and reliability.
+A Vue.js-based e-publishing reader for books, comics, brochures, posters, and more. This project has been in production for over 5 years without any maintenance, showcasing its robustness and reliability.
 
 ## Key Features
 - Customizable UI for various reading materials
